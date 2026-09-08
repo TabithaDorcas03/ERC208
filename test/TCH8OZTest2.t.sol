@@ -36,7 +36,7 @@ contract TCH80ZTest is Test {
         // b. deplyo with your `new` keyworld
         newTCH08 = new TCH8OZ(name, symbol, protocol); // deploys a contract for me
         newifOrElse = new if_else();
-        newTCH08.mint(protocol, 10000000000000e18);
+        // newTCH08.mint(protocol, 10000000000000e18);
     }
 
     // contract addess and function sig
@@ -77,7 +77,7 @@ contract TCH80ZTest is Test {
     // assignment: complete the last 3 functions
     function testTransfer() public {
         vm.startPrank(protocol);
-        // newTCH08.mint(protocol,amountToMint);
+        newTCH08.mint(protocol,amountToMint);
         // when ever you are using .transfer you dont need to identifiy the from.. msg.sender is the from 
         // tansfer(to, amount)
         newTCH08.transfer(ade, 1000);
