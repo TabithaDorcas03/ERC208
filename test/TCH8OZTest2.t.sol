@@ -85,20 +85,45 @@ contract TCH80ZTest is Test {
 
     }
 
-    function testTransferFrom() public {
-        // start prank 
-        //mint 
-        // approve need to be declared
-        // newTCH08.transferFrom(from,to, 1000);
-        //stop the prank
+   function testTransferFrom() public {
+       vm.startPrank(protocol);
+
+      // Mint tokens to protocol
+       newTCH08.mint(protocol, amountToMint);
+
+      // Approve Ade to spend 1000 tokens
+      newTCH08.approve(ade, 1000);
+
+      vm.stopPrank();
+
+      // Ade transfers 1000 tokens from protocol to Musa
+      vm.prank(ade);
+      newTCH08.transferFrom(protocol, musa, 1000);
+
+      // Check that Musa received the tokens
+      assertEq(newTCH08.balanceOf(musa), 1000);
     }
 
-    function testBurn() public {
 
-        // start a prank 
-        // mint to an address
-        // burn from that address 
-        // stop the prank
+   function testBurn() public {
+     vm.startPrank(protocol);
+
+     // Mint tokens
+        newTCH08.mint(protocol, amountToMint);
+
+     // Check the contract balance before burning
+        uint256 balanceBeforeBurn = newTCH08.balanceOf(address(newTCH08));
+
+     // Burn 1000 tokens
+        newTCH08.burn(1000);
+
+     // Check the contract balance after burning
+         uint256 balanceAfterBurn = newTCH08.balanceOf(address(newTCH08));
+
+     // The balance should decrease by 1000
+         assertEq(balanceAfterBurn, balanceBeforeBurn - 1000);
+
+        vm.stopPrank();
     }
 }
 
