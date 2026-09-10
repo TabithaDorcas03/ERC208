@@ -7,15 +7,15 @@ import {console} from "../lib/forge-std/src/console.sol";
 contract TCH80ZScript is Script {
     string public _name = "TechCrush08";
     string public _symbol = "TCH";
-    address private protocol = 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266;
+    address private protocol = 0xF8e4758e8a4FA1B9b9d7DDc0cebb2cb8059b9fae;
     uint256 public AmountToMint = 1_000_000e18;
 
     TCH8OZ public tokenTCH;
     function run() public {
-        vm.startBroadcast(0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266); //
+        vm.startBroadcast();
         tokenTCH = new TCH8OZ(_name, _symbol, protocol);
         tokenTCH.mint(address(tokenTCH), AmountToMint);
-        tokenTCH.mint(0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266, 100000e18);
+        tokenTCH.mint(0xF8e4758e8a4FA1B9b9d7DDc0cebb2cb8059b9fae, 100000e18);
         // tokenTCH.approve(address(this),100000e18 );
         // tokenTCH.transferFrom(address(tokenTCH),0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266, 100000e18);
         console.log("this is the address of my ERC80Z contract", address(tokenTCH));
